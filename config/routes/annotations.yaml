@@ -1,0 +1,7 @@
+controllers:
+    resource: ../../src/Meetup/Controller/
+    type: annotation
+
+kernel:
+    resource: ../../src/Meetup/Kernel.php
+    type: annotation

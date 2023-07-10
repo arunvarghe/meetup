@@ -1,0 +1,33 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+imports:
+    - { resource: parameters.yaml }
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Meetup\:
+        resource: '../src/Meetup/'
+        exclude:
+            - '../src/Meetup/Kernel.php'
+
+    Meetup\Client\ClientInterface $meetupClient: '@meetup_api_client'
+#    ymfony\Contracts\HttpClient\HttpClientInterface
+
+    meetup_api_http_client:
+        class: Symfony\Component\HttpClient\ScopingHttpClient
+        factory: ['Symfony\Component\HttpClient\HttpClient', 'createForBaseUri']
+        arguments: ['%env(API_BASE_URI)%']
+
+    meetup_api_client:
+        class: Meetup\Client\Client
+        arguments:
+            - '@meetup_api_http_client'
+            - '%env(CLIENT_TIME_OUT)%'

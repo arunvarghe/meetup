@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Meetup</title>
+        <link type="image/png" sizes="16x16" rel="icon" href="{{ asset('build/images/favicon.png') }}">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('meetup') }}
+        {% endblock %}
+        {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+            <a class="navbar-brand" href="{{ path('meetup_index_index') }}">
+                <b>Meetup Sample App</b>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        {% block body %}{% endblock %}
+    </body>
+</html>

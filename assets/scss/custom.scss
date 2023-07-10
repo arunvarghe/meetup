@@ -1,0 +1,46 @@
+@font-face {
+    font-family: "Avenir Light";
+    src:url("../fonts/3511a780-31ca-4ee1-9083-89b1b7185748.eot?#iefix");
+    src:url("../fonts/3511a780-31ca-4ee1-9083-89b1b7185748.eot?#iefix") format("eot"),
+    url("../fonts/c4352a95-7a41-48c1-83ce-d8ffd2a3b118.woff") format("woff"),
+    url("../fonts/3e419b5b-c789-488d-84cf-a64009cc308e.ttf") format("truetype"),
+    url("../fonts/ca038835-1be3-4dc5-ba25-be1df6121499.svg#ca038835-1be3-4dc5-ba25-be1df6121499") format("svg");
+}
+@font-face{
+    font-family:"Avenir Demi SC";
+    src:url("../fonts/05bf4460-e372-4411-8bf2-c52ad078be50.eot?#iefix");
+    src:url("../fonts/05bf4460-e372-4411-8bf2-c52ad078be50.eot?#iefix") format("eot"),
+    url("../fonts/809d6e38-4281-4624-8723-a9c08fda0dc0.woff") format("woff"),
+    url("../fonts/f9fa8229-99d5-46e0-a44b-b3635a365879.ttf") format("truetype"),
+    url("../fonts/6b9b78f8-e6fd-4fff-85a2-28b8091bcc58.svg#6b9b78f8-e6fd-4fff-85a2-28b8091bcc58") format("svg");
+}
+@font-face{
+    font-family:"Avenir Roman";
+    src:url("../fonts/2f5a6074-badc-4e08-83f1-ed67fe5c3d7c.eot?#iefix");
+    src:url("../fonts/2f5a6074-badc-4e08-83f1-ed67fe5c3d7c.eot?#iefix") format("eot"),
+    url("../fonts/b9ebb19d-88c1-4cbd-9baf-cf51972422ec.woff") format("woff"),
+    url("../fonts/5ed4f98e-9044-4810-88ff-74d412c1351f.ttf") format("truetype"),
+    url("../fonts/4cb16859-16ca-4342-b89c-292dc83266af.svg#4cb16859-16ca-4342-b89c-292dc83266af") format("svg");
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Avenir Light', "Gill Sans", "Gill Sans MT", "Arial", sans-serif;
+}
+
+.navbar .navbar-brand {
+    color: white;
+}
+
+.navbar .navbar-nav > li > a {
+    color: white;
+}
+
+.m-top-logo {
+    margin-top: -1.1rem !important;
+    margin-left: -2.8rem !important;
+}

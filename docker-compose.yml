@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  meetup-php:
+    build:
+      context: .
+      dockerfile: docker/dev/Dockerfile
+    container_name: meetup-php
+    env_file:
+      - ./.env
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    restart: on-failure

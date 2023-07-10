@@ -1,0 +1,9 @@
+$fa-font-path: "../webfonts";
+$primary: #5685c4;
+@import "node_modules/@components/bootstrap/scss/bootstrap";
+@import "node_modules/@components/fontawesome-free/scss/fontawesome";
+@import "node_modules/@components/fontawesome-free/scss/brands";
+@import "node_modules/@components/fontawesome-free/scss/solid";
+@import "node_modules/@components/bootstrap/scss/navbar";
+@import "node_modules/@components/bootstrap/scss/grid";
+@import "custom";
