@@ -16,7 +16,7 @@ pipeline {
       steps{
         script {
             def dockerBuildOptions = [
-                context: '/docker/prod/Dockerfile'
+                context: './docker/prod/Dockerfile'
             ]
             dockerAppImage = docker.build dockerappimagename dockerBuildOptions
         }
@@ -26,7 +26,7 @@ pipeline {
       steps{
         script {
             def dockerBuildOptions = [
-                context: '/docker/prod/nginx/Dockerfile'
+                context: './docker/prod/nginx/Dockerfile'
             ]
           dockerNginxImage = docker.build dockernginximagename dockerBuildOptions
         }
