@@ -18,7 +18,8 @@ pipeline {
             def dockerBuildOptions = [
                 context: './docker/prod/Dockerfile'
             ]
-            dockerAppImage = docker.build dockerBuildOptions dockerappimagename
+            dockerAppImage = docker.image(dockerappimagename).buildxBuild(args: dockerBuildOptions)
+//             docker.build dockerBuildOptions dockerappimagename
         }
       }
     }
@@ -28,7 +29,8 @@ pipeline {
             def dockerBuildOptions = [
                 context: './docker/prod/nginx/Dockerfile'
             ]
-          dockerNginxImage = docker.build dockerBuildOptions dockernginximagename
+          dockerNginxImage = docker.image(dockernginximagename).buildxBuild(args: dockerBuildOptions)
+          //docker.build dockerBuildOptions dockernginximagename
         }
       }
     }
