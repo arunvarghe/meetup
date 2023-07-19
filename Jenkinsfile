@@ -15,22 +15,14 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-            def dockerBuildOptions = [
-                context: './docker/prod/Dockerfile'
-            ]
-            dockerAppImage = docker.image(dockerappimagename).buildxBuild(args: dockerBuildOptions)
-//             docker.build dockerBuildOptions dockerappimagename
+            dockerAppImage = docker.build(dockerappimagename, './docker/prod/Dockerfile')
         }
       }
     }
     stage('Build NGINX image') {
       steps{
         script {
-            def dockerBuildOptions = [
-                context: './docker/prod/nginx/Dockerfile'
-            ]
-          dockerNginxImage = docker.image(dockernginximagename).buildxBuild(args: dockerBuildOptions)
-          //docker.build dockerBuildOptions dockernginximagename
+            dockerNginxImage = docker.build(dockernginximagename, './docker/prod/nginx/Dockerfile')
         }
       }
     }
