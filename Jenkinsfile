@@ -18,7 +18,7 @@ pipeline {
             def dockerBuildOptions = [
                 context: './docker/prod/Dockerfile'
             ]
-            dockerAppImage = docker.build dockerappimagename dockerBuildOptions
+            dockerAppImage = docker.build dockerBuildOptions dockerappimagename
         }
       }
     }
@@ -28,7 +28,7 @@ pipeline {
             def dockerBuildOptions = [
                 context: './docker/prod/nginx/Dockerfile'
             ]
-          dockerNginxImage = docker.build dockernginximagename dockerBuildOptions
+          dockerNginxImage = docker.build dockerBuildOptions dockernginximagename
         }
       }
     }
