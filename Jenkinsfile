@@ -14,28 +14,22 @@ pipeline {
     }
     stage('Build image') {
       steps{
-            agent {
-              docker {
-                  image dockerappimagename
-                  args '-f ./docker/prod/Dockerfile'
-              }
-            }
-//         script {
-//           dockerAppImage = docker.build dockerappimagename
-//         }
+        script {
+            def dockerBuildOptions = [
+                context: '/docker/prod/Dockerfile'
+            ]
+            dockerAppImage = docker.build dockerappimagename dockerBuildOptions
+        }
       }
     }
     stage('Build NGINX image') {
       steps{
-        agent {
-            docker {
-                image dockernginximagename
-                args '-f ./docker/prod/nginx/Dockerfile'
-            }
+        script {
+            def dockerBuildOptions = [
+                context: '/docker/prod/nginx/Dockerfile'
+            ]
+          dockerNginxImage = docker.build dockernginximagename dockerBuildOptions
         }
-//         script {
-//           dockerNginxImage = docker.build dockernginximagename
-//         }
       }
     }
     stage('Pushing NGINX Image') {
