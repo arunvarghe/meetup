@@ -6,6 +6,13 @@ phpunit_options := $(phpunit_options) --coverage-clover build/reports/coverage.x
 composer:
 	composer install
 
+
+install:
+	make composer
+	yarn cache clean
+	yarn install
+	yarn encore production
+
 test:
 	echo "################### ALL TESTS ###################"
 	$(PHP_BIN) bin/console cache:clear --env=test

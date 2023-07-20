@@ -19,6 +19,16 @@ pipeline {
         }
       }
     }
+    stage('Run install libraries and tests') {
+      steps{
+        script {
+            dockerAppImage.inside {
+                sh 'make install'
+                sh 'make test'
+            }
+        }
+      }
+    }
     stage('Build NGINX image') {
       steps{
         script {
