@@ -16,8 +16,6 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-            sh "docker rm -f ${dockerappcontainername}"
-            sh "docker rmi ${dockerappimagename}"
             dockerAppImage = docker.build(dockerappimagename, '-f ./docker/prod/Dockerfile .')
         }
       }
