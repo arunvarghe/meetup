@@ -15,14 +15,14 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-            dockerAppImage = docker.build(dockerappimagename, './docker/prod/Dockerfile')
+            dockerAppImage = docker.build(dockerappimagename, '-f ./docker/prod/Dockerfile .')
         }
       }
     }
     stage('Build NGINX image') {
       steps{
         script {
-            dockerNginxImage = docker.build(dockernginximagename, './docker/prod/nginx/Dockerfile')
+            dockerNginxImage = docker.build(dockernginximagename, '-f ./docker/prod/nginx/Dockerfile .')
         }
       }
     }
