@@ -80,12 +80,12 @@ pipeline {
         }
       }
     }
-//     stage('Deploying React.js container to Kubernetes') {
-//       steps {
-//         script {
-//           kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
-//         }
-//       }
-//     }
+    stage('Deploying app container to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "${pwd()}/kubernetes/app.yaml", "${pwd()}/kubernetes/nginx.yaml")
+        }
+      }
+    }
   }
 }
