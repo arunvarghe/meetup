@@ -1,6 +1,7 @@
 pipeline {
   environment {
     dockerappimagename = "arunvarghe/meetup"
+    dockerappcontainername = 'meetup-app'
     dockerAppImage = ""
     dockernginximagename = "arunvarghe/nginx"
     dockerNginxImage = ""
@@ -15,6 +16,8 @@ pipeline {
     stage('Build image') {
       steps{
         script {
+            sh "docker rm -f ${dockerappcontainername}"
+            sh "docker rmi ${dockerappimagename}"
             dockerAppImage = docker.build(dockerappimagename, '-f ./docker/prod/Dockerfile .')
         }
       }
@@ -22,16 +25,33 @@ pipeline {
     stage('Run install libraries and tests') {
       steps{
         script {
-            dockerAppImage.inside {
-                sh 'make install'
-                sh 'make test'
+            dockerAppImage.run("--name ${dockerappcontainername} --volume ${pwd()}/:/code")
+            sh "docker exec ${dockerappcontainername} make install"
+            try {
+                // run tests in the same workspace that the project was built
+                sh "docker exec ${dockerappcontainername} make test"
+            } catch (e) {
+                // if any exception occurs, mark the build as failed
+                currentBuild.result = 'FAILURE'
+                throw e
             }
+            sh "ls -la"
+        }
+      }
+    }
+    stage('Build image again with vendor and node modules to make complete pack') {
+      steps{
+        script {
+            sh "docker rm -f ${dockerappcontainername}"
+            sh "docker rmi ${dockerappimagename}"
+            dockerAppImage = docker.build(dockerappimagename, '-f ./docker/prod/Dockerfile .')
         }
       }
     }
     stage('Build NGINX image') {
       steps{
         script {
+            sh "docker rmi ${dockernginximagename}"
             dockerNginxImage = docker.build(dockernginximagename, '-f ./docker/prod/nginx/Dockerfile .')
         }
       }
@@ -42,7 +62,7 @@ pipeline {
            }
       steps{
         script {
-          docker.withRegistry( 'https://hub.docker.com', registryCredential ) {
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
             dockerNginxImage.push("latest")
           }
         }
@@ -54,7 +74,7 @@ pipeline {
            }
       steps{
         script {
-          docker.withRegistry( 'https://hub.docker.com', registryCredential ) {
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
             dockerAppImage.push("latest")
           }
         }
