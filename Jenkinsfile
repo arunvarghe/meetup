@@ -49,7 +49,6 @@ pipeline {
     stage('Build NGINX image') {
       steps{
         script {
-            sh "docker rmi ${dockernginximagename}"
             dockerNginxImage = docker.build(dockernginximagename, '-f ./docker/prod/nginx/Dockerfile .')
         }
       }
@@ -75,6 +74,14 @@ pipeline {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
             dockerAppImage.push("latest")
           }
+        }
+      }
+    }
+    stage('Clean image') {
+      steps{
+        script {
+            sh "docker rmi ${dockernginximagename}"
+             sh "docker rmi ${dockerappimagename}"
         }
       }
     }
