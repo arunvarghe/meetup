@@ -81,7 +81,7 @@ pipeline {
       steps{
         script {
             sh "docker rmi ${dockernginximagename}"
-             sh "docker rmi ${dockerappimagename}"
+            sh "docker rmi ${dockerappimagename}"
         }
       }
     }
