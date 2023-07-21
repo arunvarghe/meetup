@@ -29,8 +29,9 @@ metadata:
 spec:
   selector:
     app: meetup-nginx
+  type: NodePort
   ports:
   - protocol: TCP
     port: 8080
-    targetPort: 8085
+    targetPort: 8080
         

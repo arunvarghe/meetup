@@ -13,6 +13,7 @@ pipeline {
         git 'https://github.com/arunvarghe/meetup.git'
       }
     }
+
     stage('Build image') {
       steps{
         script {
@@ -55,8 +56,8 @@ pipeline {
     }
     stage('Pushing NGINX Image') {
       environment {
-               registryCredential = 'dockerhub-credentials'
-           }
+        registryCredential = 'dockerhub-credentials'
+      }
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
@@ -67,8 +68,8 @@ pipeline {
     }
     stage('Pushing App Image') {
       environment {
-               registryCredential = 'dockerhub-credentials'
-           }
+        registryCredential = 'dockerhub-credentials'
+      }
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
@@ -88,7 +89,8 @@ pipeline {
     stage('Deploying app container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "${pwd()}/kubernetes/app.yaml", "${pwd()}/kubernetes/nginx.yaml")
+          kubernetesDeploy(configs: "kubernetes/app.yaml", kubeconfigId: "kubernetes")
+          kubernetesDeploy(configs: "kubernetes/nginx.yaml", kubeconfigId: "kubernetes")
         }
       }
     }
