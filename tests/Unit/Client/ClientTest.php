@@ -51,7 +51,7 @@ class ClientTest extends TestCase
             );
 
         $this->expectException(ApiClientTransportException::class);
-        $this->expectExceptionCode(Response::HTTP_GATEWAY_TIMEOUT);
+        $this->expectExceptionCode(Response::HTTP_EARLY_HINTS);
         $this->expectExceptionMessage(ApiClientTransportException::DEFAULT_MESSAGE);
 
         $this->apiClient->request($requestMethod, 'profile');
